@@ -9,9 +9,7 @@ Gabriel Negreiros Saraiva
 Rodolfo França Souza
 
 ## Datasets:
-- [games on steam till november 2022](https://www.kaggle.com/datasets/tristan581/all-55000-games-on-steam-november-2022?select=steam_games.csv)
-- [popularity of games on steam](https://www.kaggle.com/datasets/michau96/popularity-of-games-on-steam)
-- [steam reviews](https://www.kaggle.com/datasets/andrewmvd/steam-reviews)
+- [dados sobre venda de jogos](https://www.kaggle.com/datasets/gregorut/videogamesales)
 
 ## Perguntas:
 - Como a combinação de gêneros do jogo pode afetar o sucesso do jogo hoje em dia?
