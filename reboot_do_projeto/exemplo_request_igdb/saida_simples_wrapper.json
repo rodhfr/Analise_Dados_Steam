@@ -1,0 +1,76 @@
+[
+    {
+        "id": 131913,
+        "category": 0,
+        "cover": 267633,
+        "first_release_date": 1474416000,
+        "game_modes": [
+            1
+        ],
+        "involved_companies": [
+            94670,
+            94671
+        ],
+        "platforms": [
+            46
+        ],
+        "player_perspectives": [
+            5
+        ],
+        "slug": "maji-kyun-renaissance",
+        "storyline": "In a world where art becomes magic, Aigasaki Kohana is a student who just enrolled into Hoshigei Academy, a high school conceived to help students fully develop their art. Inspired by her late mother, a flower arranger, she enrolls as a second year student. However, while she discovers what becoming an Artista really means, she'll discover friendship and love...",
+        "summary": "A cross media collaboration project between Sunrise & Broccolli.",
+        "url": "https://www.igdb.com/games/maji-kyun-renaissance",
+        "game_localizations": [
+            12809
+        ]
+    },
+    {
+        "id": 122801,
+        "aggregated_rating": 70.0,
+        "aggregated_rating_count": 2,
+        "category": 0,
+        "cover": 96241,
+        "first_release_date": 1492732800,
+        "game_modes": [
+            1
+        ],
+        "involved_companies": [
+            131651
+        ],
+        "platforms": [
+            6,
+            14,
+            34,
+            39,
+            130
+        ],
+        "slug": "zhed",
+        "summary": "ZHED is an instant classic puzzle game. Based on a simple mechanic, it builds onto increasingly complex puzzles that challenge you to a level you would not imagine. No timers, no clocks, no stars and no tricks, just pure puzzles for you to enjoy.",
+        "url": "https://www.igdb.com/games/zhed"
+    },
+    {
+        "id": 88308,
+        "category": 0,
+        "cover": 64849,
+        "first_release_date": 1478649600,
+        "platforms": [
+            39
+        ],
+        "slug": "hey-duggee-the-big-outdoor-app",
+        "summary": "Welcome to the Big Outdoors, Squirrels! Introducing the latest app featuring Hey Duggee! Safe, ad-free fun for your little ones. \n \nCompleting each activity earns the Squirrel a badge. With 5 Squirrels playing for 7 badges each, that’s a whole lot of Duggee Hugs!",
+        "url": "https://www.igdb.com/games/hey-duggee-the-big-outdoor-app"
+    },
+    {
+        "id": 95080,
+        "category": 0,
+        "slug": "dotra",
+        "url": "https://www.igdb.com/games/dotra"
+    },
+    {
+        "id": 104748,
+        "category": 0,
+        "slug": "space-station-build-your-own-iss",
+        "url": "https://www.igdb.com/games/space-station-build-your-own-iss"
+    }
+]
