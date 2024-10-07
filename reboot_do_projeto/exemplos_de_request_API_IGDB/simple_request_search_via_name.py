@@ -18,7 +18,7 @@ HEADERS = {
 }
 
 
-game_name = "LEGO Star Wars: The Complete Saga"
+game_name = "Bunny E-shop"
 
 # Configure here the endpoint and the desired data
 #url_endpoint = 'games'

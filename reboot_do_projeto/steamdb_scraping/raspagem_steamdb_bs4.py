@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup  # Import BeautifulSoup
 import json
 
 # Define the path to your HTML file
-html_file_path = r'C:/Users/Rod/Code/IGDB-API/steamdb/Selenium-Model/steamdb.htm'
+html_file_path = 'steamdb.htm'
 
 # Read the HTML file
 with open(html_file_path, 'r', encoding='utf-8') as file:
@@ -39,7 +39,7 @@ for i in range(1000):
         all_games_data.append(new_entry)
 
 # Define JSON file path
-json_file_path = 'game_ratings2.json'
+json_file_path = '../3_game_ratings.json'
 
 # Write the JSON file with utf-8 encoding
 with open(json_file_path, 'w', encoding='utf-8') as json_file:

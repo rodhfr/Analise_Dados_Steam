@@ -1,10 +1,10 @@
 import json
 
 # Carregar os arquivos JSON
-with open('rankings.json', 'r', encoding='utf-8') as rankings_file:
+with open('3_game_ratings.json', 'r', encoding='utf-8') as rankings_file:
     rankings_data = json.load(rankings_file)
 
-with open('details.json', 'r', encoding='utf-8') as details_file:
+with open('3_game_info.json', 'r', encoding='utf-8') as details_file:
     details_data = json.load(details_file)
 
 # Juntar os dados
@@ -27,7 +27,7 @@ for ranking in rankings_data:
         }
 
 # Salvar o resultado em um novo arquivo JSON
-with open('combined.json', 'w', encoding='utf-8') as combined_file:
+with open('4_combined_dataframe.json', 'w', encoding='utf-8') as combined_file:
     json.dump(combined_json, combined_file, ensure_ascii=False, indent=4)
 
-print("Combinação concluída e salva em 'combined.json'.")
+print("Combinação concluída e salva em '4_combined_dataframe.json'.")
