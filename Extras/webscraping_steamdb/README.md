@@ -1,0 +1,1 @@
+dados da steamdb foram extraidos a ultima vez em 06/10/2024
