@@ -236,7 +236,7 @@ class IGDBApiWrapper:
             self.write_data_to_file(all_games_data, write_file_path)
 
 
-    def remove_cover_item(self, read_file_path, write_file_path='', item=''):
+    def remove_item_from_key(self, read_file_path, write_file_path='', item=''):
         all_games_data = self.load_games_data(read_file_path)
 
         # Remove the "cover" item from each game's details
@@ -248,10 +248,10 @@ class IGDBApiWrapper:
         if write_file_path:
             self.write_data_to_file(all_games_data, write_file_path)
 
-    def fetch_time_beats_for_all_games(self, read_file_path, initial_limit = 0, end_limit = 0, write_file_path=''):
+    def fetch_time_beats_for_all_games(self, file_path, initial_limit = 0, end_limit = 0):
 
 
-        all_games_data = self.load_games_data(read_file_path)
+        all_games_data = self.load_games_data(file_path)
 
         beats_names = {}
         beats = {}
@@ -288,10 +288,53 @@ class IGDBApiWrapper:
             all_games_data[game_name][req_field] = beats_names.get(game_name, [])
 
         self.write_data_to_file(data=all_games_data, output='fetch_time_beats_for_all_games.json')
-        if write_file_path != '':
-            self.write_data_to_file(data=all_games_data, output=write_file_path)
+        self.write_data_to_file(data=all_games_data, output=file_path)
 
         return beats_names  
+
+    def fetch_genre_for_all_games(self, file_path, initial_limit=0, end_limit=0):
+        games_data = 'fetch_details_for_all_games.json'
+        tmp_file_exists = self.check_baseline_info()
+
+        # checar se o arquivo com os ids das categorias dos endpoints esta disponivel
+        if tmp_file_exists:
+            games_data = tmp_file_exists 
+        else:
+            print("Baseline info not present. Getting from API...")
+            games_data = self.fetch_details_for_all_games(file_path, initial_limit, end_limit)
+
+        all_games_data = self.load_games_data(games_data)
+
+        genres_names = {}
+        genres = {}
+        for game_name in games_data.keys():
+            print(game_name)
+            game_data = games_data[game_name]
+
+            # Verificar se a chave 'genres' existe antes de acessar
+            if 'genres' in game_data:
+                id_genres = game_data['genres']
+                id_genres_str = ', '.join(map(str, id_genres))
+
+                # Solicitar nomes dos gêneros
+                req_ask = f'fields id, name; where id = ({id_genres_str});'
+                genres_data = self._make_request(endpoint='genres', data=req_ask)
+
+                # Obter apenas os nomes dos gêneros retornados
+                genre_names = [genre['name'] for genre in genres_data]
+            else:
+                genre_names = []  # Definir lista vazia se a chave 'genres' não estiver presente
+
+            genres[game_name] = genres_data if 'genres' in game_data else []
+            genres_names[game_name] = genre_names
+
+        # Substituir os ids antigos dos gêneros pelos nomes dos gêneros
+        for game_name in all_games_data:
+            all_games_data[game_name]['genres'] = genres_names.get(game_name, [])
+
+        self.write_data_to_file(data=all_games_data, output='fetch_genre_for_all_games.json')
+
+        return genres_names
 
 
 def main():
@@ -315,7 +358,7 @@ def main():
     #response = api_wrapper.remove_cover_item(read_file_path='overwrite2.json', write_file_path='overwrite2.json', item='cover')
     #api_wrapper.remove_cover_item(read_file_path='overwrite2.json', write_file_path='overwrite2.json', item= 'multiplayer_modes')
     #api_wrapper.remove_cover_item(read_file_path='overwrite2.json', write_file_path='overwrite2.json', item= 'remasters')
-    api_wrapper.remove_cover_item(read_file_path='overwrite2.json', write_file_path='overwrite2.json', item= 'game_localizations')
+    api_wrapper.fetch_genre_for_all_games(read_file_path='overwrite2.json', write_file_path='overwrite2.json')
 
     #print(response)
 if __name__ == "__main__":
