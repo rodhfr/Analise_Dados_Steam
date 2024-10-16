@@ -45,7 +45,7 @@ Rodolfo França Souza
 - Plataforma com Mais Avaliações Positivas/Negativas do Público/Críticos 📱
 - Perspectiva com Mais Avaliações Positivas/Negativas do Público/Críticos 👀
 - Modos de Jogo com Mais Avaliações Positivas/Negativas 🕹️
-- Empresa com Mais Avaliações Positivas/Negativas 🏅
+- Plataforma com Mais Avaliações Positivas/Negativas 🏅
 - Game Engine com Mais Avaliações Positivas/Negativas ⚙️
 - Boxplot de Reviews Negativos (para jogos na lista dos mil) 📉
 - Desvio Padrão da Quantidade de Reviews (Positivas/Negativas), Total e Percentagem 📏
