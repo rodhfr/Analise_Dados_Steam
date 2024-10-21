@@ -8,15 +8,15 @@ Gabriel Negreiros Saraiva
 
 Rodolfo França Souza
 
-# Análise de Avaliações de Jogos 🎮
+## Perguntas de Análise ❓
+* Quais são os gêneros de jogos que tem as melhores classificações médias?
+* Quais são as plataformas com mais jogos entre os mil mais bem avaliados da Steam?
+* Há alguma relação entre os jogos mais populares serem os mais bem avaliados?
 
-## Medidas de Dispersão 📊
 
-1. **Medidas de Dispersão: Média e Mediana** 📈
-2. **Moda** 🔍
-3. **Boxplot** 📦
-4. **Gráfico de Desvio Padrão e Mediana** 📏
-5. **Gráfico de Dispersão e Gráfico de Histograma e Gráfico de Barra** 📉📊
+
+## Medidas de Centralidade
+## Medidas de Dispersão 
 
 ## Informações Coletadas 📋
 
@@ -33,7 +33,6 @@ Rodolfo França Souza
 - Perspectivas dos Jogadores 🎭
 - Localização do Lançamento do Jogo 📍
 
-## Perguntas de Análise ❓
 
 ### Percepções sobre as Reviews (Medidas de Dispersão) 📊
 
