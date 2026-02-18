@@ -1,78 +1,75 @@
-# Analise de Dados Steam
-## Integrantes: 
-Caio Vitor Melo de Santana
+# Steam Top 1000: Análise de Dados
 
-Rougger Xavier Guerra Neto
+Análise exploratória dos **1000 jogos mais bem avaliados da Steam**, cobrindo todo o pipeline de dados — da coleta à clusterização.
 
-Gabriel Negreiros Saraiva
+## Pipeline de Dados
 
-Rodolfo França Souza
+```
+SteamDB (web scraping)
+        │
+        ▼
+   IGDB API (enriquecimento)
+        │
+        ▼
+   Limpeza & Transformação
+        │
+        ▼
+   EDA + K-Means
+```
 
-## Perguntas de Análise ❓
-* Quais são os gêneros de jogos que tem as melhores classificações médias?
-* Quais são as plataformas com mais jogos entre os mil mais bem avaliados da Steam?
-* Há alguma relação entre os jogos mais populares serem os mais bem avaliados?
+### Coleta de Dados
 
+- **Webscraping do SteamDB** (`src/ingestion/webscraping/`): raspagem do ranking dos 1000 jogos mais bem avaliados usando BeautifulSoup, extraindo avaliações positivas/negativas e percentual de aprovação.
+- **API do IGDB** (`src/ingestion/igdb_api/`): enriquecimento via API REST da Internet Game Database (autenticação OAuth2 via Twitch), coletando gêneros, plataformas, perspectivas, engine, notas de críticos e datas de lançamento. Taxa de 4 req/s (~4 min para os 1000 jogos).
 
+### Limpeza do Dataset
 
-## Medidas de Centralidade
-## Medidas de Dispersão 
+Duas rodadas de limpeza documentadas em `src/cleaning/`:
+- **v1**: normalização de strings, remoção de vírgulas em campos numéricos, tratamento de backslashes em listas (plataformas/gêneros).
+- **v2**: re-rating de jogos com dados faltantes, consolidação do JSON final.
 
-## Informações Coletadas 📋
+## Perguntas de Análise
 
-- Número de Avaliações Positivas 👍
-- Número de Avaliações Negativas 👎
-- Total de Avaliações 📊
-- Percentagem de Avaliações 💯
-- Engine do Jogo 🛠️
-- Avaliação dos Críticos ✍️
-- Quantidade de Veículos de Imprensa por Jogo 📰
-- Data de Lançamento dos Jogos 📅
-- Empresas que Desenvolveram os Jogos 🏢
-- Plataformas 🎮
-- Perspectivas dos Jogadores 🎭
-- Localização do Lançamento do Jogo 📍
+1. Quais gêneros têm as melhores classificações médias?
+2. Quais plataformas concentram mais jogos entre os 1000 mais bem avaliados?
+3. Popularidade (total de reviews) implica melhor avaliação?
 
+## Análises Realizadas
 
-### Percepções sobre as Reviews (Medidas de Dispersão) 📊
+| Seção | Conteúdo |
+|---|---|
+| Medidas de Centralidade | Médias e medianas de reviews (SteamDB + IGDB), modas por modo de jogo, plataforma, engine e perspectiva |
+| Medidas de Dispersão | Boxplots, desvio padrão, detecção de outliers via z-score |
+| Gráficos | Histogramas de plataformas por ano, correlação entre popularidade e avaliação, ranking de gêneros (público vs crítica) |
+| Sistema de Score | Score composto combinando nota Steam, nota IGDB e volume de reviews |
+| K-Means | Clusterização em 4 grupos por features numéricas + ano de lançamento |
 
-- Média das Reviews Totais 📊
-- Média das Reviews Positivas/Negativas 📈📉
-- Média Total 🌍
-- Mediana das Reviews Positivas/Negativas 📏
-- Gênero de Jogos com Mais Reviews Positivas/Negativas do Público/Críticos 🎮
-- Plataforma com Mais Avaliações Positivas/Negativas do Público/Críticos 📱
-- Perspectiva com Mais Avaliações Positivas/Negativas do Público/Críticos 👀
-- Modos de Jogo com Mais Avaliações Positivas/Negativas 🕹️
-- Plataforma com Mais Avaliações Positivas/Negativas 🏅
-- Game Engine com Mais Avaliações Positivas/Negativas ⚙️
-- Boxplot de Reviews Negativos (para jogos na lista dos mil) 📉
-- Desvio Padrão da Quantidade de Reviews (Positivas/Negativas), Total e Percentagem 📏
+## Principais Achados
 
-### Moda das Plataformas ⚖️
+- Correlação quase nula (0,007) entre total de reviews e percentual de aprovação — popularidade não implica qualidade.
+- Roguelike lidera tanto no ranking do público quanto da crítica.
+- Outliers em volume: Terraria (1,3M reviews), Garry's Mod (1,1M), Elden Ring (968k).
+- Cluster dominante (852 jogos): lançamentos pós-2018, studios independentes, média de 10k avaliações positivas.
 
-- Jogos por Plataforma (Identificação do que tem mais entre os mil) 🔢
+## Tecnologias
 
-## Gráficos e Visualizações 📈
+- **Python** — pandas, scikit-learn, matplotlib, seaborn, BeautifulSoup, requests
+- **Jupyter Notebook**
+- **APIs**: IGDB (OAuth2/Twitch)
+- **Dados**: SteamDB + IGDB → `data/games_data.csv`
 
-### Gráficos de Correlação entre Variáveis 🔗
+## Estrutura
 
-- Total de Reviews / Percentagem 📊💯
-- Quantidade de Plataformas / Total de Reviews 📊🔢
-- Nota dos Críticos / Nota da Steam (Média Críticos / Média Steam) ⭐️💬
-
-### Histogramas 📊
-
-- Frequência de Dados: Quantidade de Jogos por Ano (PC/Xbox/PS) 📅🎮
-- Quantidade de Jogos por Empresa na Lista 🏢📊
-
-### Gráfico de Barras ou Linha de Acordo com o DataFrame 📊
-
-- Todas as avaliações que têm de cada console = Total de Reviews / Positivas e Negativas
-- Total de Vendas (talvez)
-
-### Aplicar o K-means no conjunto de dados
-## Análises Mais Refinadas 🔍
-
-- Score Ranking de Companhias por Reviews Positivas (Público/Críticos) 🏆
-- Comparação de Desempenho (Score) entre Jogos Multiplayer e Single Player 🆚
+```
+├── data/                        # Dataset final (CSV + JSON)
+├── notebooks/
+│   └── analysis.ipynb           # Notebook principal
+├── src/
+│   ├── ingestion/
+│   │   ├── webscraping/         # Scraper do SteamDB
+│   │   └── igdb_api/            # Wrapper + scripts de requisição IGDB
+│   └── cleaning/
+│       ├── v1/                  # Primeira rodada de limpeza
+│       └── v2/                  # Segunda rodada (dataset final)
+└── assets/                      # Imagens e capturas de tela
+```
